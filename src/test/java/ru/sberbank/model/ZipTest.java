@@ -7,18 +7,19 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import java.io.InputStreamReader;
 import java.util.List;
+import java.util.Objects;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ZipTest {
-    private ClassLoader cl = ZipTest.class.getClassLoader();
+    private final ClassLoader cl = ZipTest.class.getClassLoader();
 
     @DisplayName("CSV в ZIP")
     @Test
     void checkCvsFileInZipTest() throws Exception {
         try (ZipInputStream zis = new ZipInputStream(
-                cl.getResourceAsStream("zip.zip"))) {
+                Objects.requireNonNull(cl.getResourceAsStream("zip.zip")))) {
             ZipEntry zentry;
             while ((zentry = zis.getNextEntry()) != null) {
                 if (zentry.getName().contains(".csv")) {
@@ -38,7 +39,7 @@ public class ZipTest {
         @Test
         void checkXlsxFileInZipTest() throws Exception {
             try (ZipInputStream zis = new ZipInputStream(
-                    cl.getResourceAsStream("my_zipzip.zip"))) {
+                    Objects.requireNonNull(cl.getResourceAsStream("my_zipzip.zip")))) {
                 ZipEntry entry;
                 while ((entry = zis.getNextEntry()) != null) {
                     if (entry.getName().contains(".xlsx")) {
@@ -55,7 +56,7 @@ public class ZipTest {
         @Test
         void checkPdfFileInZipTest() throws Exception {
             try (ZipInputStream zis = new ZipInputStream(
-                    cl.getResourceAsStream("my_zipzip.zip"))) {
+                    Objects.requireNonNull(cl.getResourceAsStream("my_zipzip.zip")))) {
                 ZipEntry entry;
                 while ((entry = zis.getNextEntry()) != null) {
                     if (entry.getName().contains(".pdf")) {
