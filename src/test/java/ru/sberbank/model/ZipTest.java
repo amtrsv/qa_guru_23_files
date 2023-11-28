@@ -33,8 +33,6 @@ public class ZipTest {
         }
     }
 
-
-
         @DisplayName("XLSX в ZIP")
         @Test
         void checkXlsxFileInZipTest() throws Exception {
